@@ -1,0 +1,92 @@
+#stock market kafka real time data streaming project --
+
+
+end to end data engineering project using kafka
+
+technologies used - 
+Programming languages  -  python
+
+aws services -  
+    Ec2
+    S3
+    Apache kafka 
+    Glue crawler
+    Glue catalog
+    Athena
+
+dataset 
+
+wget https://downloads.apache.org/kafka/3.4.0/kafka-3.4.0-src.tgz
+tar -xvf kafka.tgz
+
+********
+java -version
+
+sudo yum install java-1.8.0-openjdk
+
+java -version
+
+cd kafka
+
+*********
+
+
+
+************
+Start the Zoo-keeper:
+
+bin/zookeeper-server-start.sh config/zookeeper.properties
+
+**********
+
+
+***********
+Start the Kafka-server:
+
+Duplicating the session & enter into a new console --
+
+export KAFKA_HEAP_OPTS="-Xmx256M -Xms128M"
+
+cd kafka
+
+bin/kafka-server-start.sh config/server.properties
+
+
+
+********************
+point to private server now change server.properties and run in public IP 
+
+follow up by below command---
+
+"sudo nano config/server.properties" - change ADVERTISED_LISTENERS --> to public ip of EC2 instance
+
+
+*****************
+Creation of  topic:
+
+Duplicating  the session & enter into the new console --
+
+cd kafka
+
+bin/kafka-topics.sh --create --topic demo_test --bootstrap-server {Public IP of your EC2 Instance:9092} --replication-factor 1 --partitions 1
+************
+
+
+******************
+Start the Producer:
+
+bin/kafka-console-producer.sh --topic demo_test --bootstrap-server {Public IP of your EC2 Instance:9092} 
+
+**********************
+
+
+************************
+Start the Consumer:
+
+Duplicating  the session & enter into the new console --
+
+cd kafka
+
+bin/kafka-console-consumer.sh --topic demo_test --bootstrap-server {Public IP of your EC2 Instance:9092}
+
+**************************
